@@ -3,7 +3,6 @@ import { TextField, Button, Box, Typography, Container, Paper, IconButton, Input
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Cloud as CloudIcon } from '@mui/icons-material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const GradientBackground = styled(Box)({
@@ -47,9 +46,9 @@ const StyledPaper = styled(Paper)({
   overflow: 'hidden',
 });
 
-const CloudLogo = styled(CloudIcon)({
-  fontSize: '4rem',
-  color: '#005bea',
+const Logo = styled('img')({
+  width: '80px',
+  height: '80px',
   marginBottom: '1rem',
 });
 
@@ -145,7 +144,7 @@ const Login = () => {
               alignItems: 'center',
             }}
           >
-            <CloudLogo />
+            <Logo src="/logo192.png" alt="OpenStack Logo" />
             <Title variant="h4">
               OpenStack Cloud
             </Title>
