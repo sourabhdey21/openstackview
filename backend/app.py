@@ -175,6 +175,15 @@ def get_resources():
         except Exception as e:
             logger.error(f"Error fetching images: {str(e)}")
             images_list = []
+
+        # Fetch keypairs
+        logger.info("Fetching keypairs")
+        try:
+            keypairs_list = list(nova.keypairs.list())
+            logger.info(f"Found {len(keypairs_list)} keypairs")
+        except Exception as e:
+            logger.error(f"Error fetching keypairs: {str(e)}")
+            keypairs_list = []
         
         # Get flavor information
         logger.info("Fetching flavors")
@@ -225,6 +234,19 @@ def get_resources():
             except Exception as e:
                 logger.error(f"Error processing image {getattr(image, 'id', 'unknown')}: {str(e)}")
 
+        # Process keypairs
+        processed_keypairs = []
+        for keypair in keypairs_list:
+            try:
+                processed_keypairs.append({
+                    'name': keypair.name,
+                    'fingerprint': keypair.fingerprint,
+                    'public_key': keypair.public_key,
+                    'created_at': getattr(keypair, 'created_at', None)
+                })
+            except Exception as e:
+                logger.error(f"Error processing keypair {getattr(keypair, 'name', 'unknown')}: {str(e)}")
+
         # Calculate total cost
         total_cost = sum(instance['pricing']['total_cost'] for instance in processed_instances)
         
@@ -234,6 +256,7 @@ def get_resources():
             'networks': networks['networks'],
             'volumes': processed_volumes,
             'images': processed_images,
+            'keypairs': processed_keypairs,
             'pricing_info': {
                 'total_cost': total_cost,
                 'currency': 'INR',
