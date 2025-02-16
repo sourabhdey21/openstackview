@@ -10,7 +10,7 @@ services:
     depends_on:
       - backend
     environment:
-      - REACT_APP_API_URL=http://localhost:5000
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
 
   backend:
     build:
@@ -19,10 +19,14 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - OS_AUTH_URL=https://192.168.1.71:5000/v3/
-      - OS_USERNAME=admin
-      - OS_PASSWORD=SGE1vma7FuWs1IGB3uFdQhXNZporJXTX
-      - OS_PROJECT_NAME=admin
-      - OS_REGION_NAME=RegionOne
+      - OS_AUTH_URL=${OS_AUTH_URL}
+      - OS_USERNAME=${OS_USERNAME}
+      - OS_PASSWORD=${OS_PASSWORD}
+      - OS_PROJECT_NAME=${OS_PROJECT_NAME}
+      - OS_REGION_NAME=${OS_REGION_NAME}
+      - FLASK_APP=${FLASK_APP}
+      - FLASK_ENV=${FLASK_ENV}
+      - FLASK_DEBUG=${FLASK_DEBUG}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     volumes:
       - ./backend:/app 
