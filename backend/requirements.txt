@@ -1,0 +1,10 @@
+flask==2.0.1
+flask-cors==3.0.10
+python-dotenv==0.19.0
+python-keystoneclient==4.3.0
+python-novaclient==17.6.0
+python-neutronclient==7.8.0
+python-cinderclient==8.3.0
+python-glanceclient==3.5.0
+PyJWT==2.3.0
+requests==2.26.0 
